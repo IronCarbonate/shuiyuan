@@ -1,0 +1,37 @@
+名称: CreateCommentMessage
+类型: API
+描述: 创建评论功能，处理发布新评论的请求
+参数:
+- 参数名: userToken
+  参数描述: 用户登录令牌，用于验证用户权限和身份
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: input
+  默认取值: null
+- 参数名: postID
+  参数描述: 目标帖子的唯一标识ID，表示评论关联的帖子
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: input
+  默认取值: null
+- 参数名: content
+  参数描述: 评论的详细内容
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: input
+  默认取值: null
+- 参数名: commentID
+  参数描述: 新创建评论的唯一标识ID
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: output
+  默认取值: null
+对象路径: shuiyuanbasic/CommentService/CommentService-APIRoot/CreateCommentMessage

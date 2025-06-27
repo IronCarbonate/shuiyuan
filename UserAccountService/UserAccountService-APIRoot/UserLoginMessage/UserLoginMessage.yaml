@@ -1,0 +1,29 @@
+名称: UserLoginMessage
+类型: API
+描述: 用户登录，验证账户和密码是否匹配后返回 userToken。
+参数:
+- 参数名: accountName
+  参数描述: 用户账户名称
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: input
+  默认取值: null
+- 参数名: password
+  参数描述: 用户账户密码
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: input
+  默认取值: null
+- 参数名: userToken
+  参数描述: 登录成功后生成的唯一令牌，用于验证用户登录状态
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: output
+  默认取值: null
+对象路径: shuiyuanbasic/UserAccountService/UserAccountService-APIRoot/UserLoginMessage

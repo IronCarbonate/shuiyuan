@@ -1,0 +1,40 @@
+名称: CommentTable
+类型: Table
+描述: 评论表，包含评论的基本信息
+参数:
+- 参数名: comment_id
+  参数描述: 评论的唯一ID
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  mode: input
+- 参数名: post_id
+  参数描述: 所属帖子的Post ID
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  mode: input
+- 参数名: user_id
+  参数描述: 评论发布者的用户ID
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  mode: input
+- 参数名: content
+  参数描述: 评论的内容
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  mode: input
+- 参数名: created_at
+  参数描述: 评论创建时间
+  参数类型: DateTime
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  mode: input
+对象路径: shuiyuanbasic/CommentService/CommentService-TableRoot/CommentTable

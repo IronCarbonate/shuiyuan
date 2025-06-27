@@ -1,0 +1,6 @@
+名称: CommentService
+微服务描述: '[A000004]service node'
+类型: Service
+编号: PostService,UserAccountService
+微服务补充描述: '[A000004]service node'
+对象路径: shuiyuanbasic/CommentService

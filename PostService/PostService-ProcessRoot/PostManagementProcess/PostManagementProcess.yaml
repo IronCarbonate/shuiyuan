@@ -1,0 +1,5 @@
+名称: PostManagementProcess
+类型: Process
+描述: 用于管理帖子的工具类文件
+参数: []
+对象路径: shuiyuanbasic/PostService/PostService-ProcessRoot/PostManagementProcess

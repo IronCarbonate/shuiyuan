@@ -1,0 +1,18 @@
+名称: UpdateUserNicknameMessagePlanner
+类型: APIPlan
+总起句: ''
+步骤:
+- 步骤序号: '1'
+  内容: 调用<a href="shuiyuanbasic/UserAccountService/UserAccountService-ProcessRoot/UserPermissionProcess/checkPermission">checkPermission</a>方法，验证userToken的有效性和用户权限。
+  细分步骤: []
+- 步骤序号: '2'
+  内容: 提取验证通过的用户ID。
+  细分步骤: []
+- 步骤序号: '3'
+  内容: 调用<a href="shuiyuanbasic/UserAccountService/UserAccountService-ProcessRoot/UserManagementProcess/updateNickname">updateNickname</a>方法，传入提取的userID和newNickname参数，更新用户昵称字段。
+  细分步骤: []
+- 步骤序号: '4'
+  内容: 返回更新成功的提示信息，例如“修改昵称成功”。
+  细分步骤: []
+对象路径: shuiyuanbasic/UserAccountService/UserAccountService-APIRoot/UpdateUserNicknameMessage/UpdateUserNicknameMessagePlanner
+是否精炼过步骤: true

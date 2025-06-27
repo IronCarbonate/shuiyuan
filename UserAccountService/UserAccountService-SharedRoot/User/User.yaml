@@ -1,0 +1,56 @@
+名称: User
+描述: 用户信息实体类，包含用户的基本信息和权限
+参数:
+- 参数名: userID
+  参数描述: 用户的唯一标识ID
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  mode: input
+  默认取值: null
+- 参数名: accountName
+  参数描述: 用户的账户名
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  mode: input
+  默认取值: null
+- 参数名: password
+  参数描述: 用户的密码
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  mode: input
+  默认取值: null
+- 参数名: nickName
+  参数描述: 用户的昵称
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  mode: input
+  默认取值: null
+- 参数名: isMuted
+  参数描述: 表示用户是否被禁言
+  参数类型: Boolean
+  对象路径: ''
+  是否列表: false
+  mode: input
+  默认取值: null
+- 参数名: createdAt
+  参数描述: 用户账户创建时间
+  参数类型: DateTime
+  对象路径: ''
+  是否列表: false
+  mode: input
+  默认取值: null
+- 参数名: permission
+  参数描述: 用户的权限信息
+  参数类型: UserPermission
+  对象路径: shuiyuanbasic/UserAccountService/UserAccountService-SharedRoot/UserPermission
+  是否列表: false
+  mode: input
+  默认取值: null
+类型: Shared
+父类: ''
+是否抽象类: false
+对象路径: shuiyuanbasic/UserAccountService/UserAccountService-SharedRoot/User

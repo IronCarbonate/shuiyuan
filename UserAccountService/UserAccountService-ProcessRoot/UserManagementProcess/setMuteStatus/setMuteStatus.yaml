@@ -1,0 +1,62 @@
+名称: setMuteStatus
+类型: ProcessPlan
+description: 根据targetUserID，更新用户的禁言状态字段为isMuted值，返回“禁言状态更新成功”。
+参数:
+- 参数名: targetUserID
+  参数描述: 需要更新禁言状态的用户ID。
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: input
+  默认取值: ''
+- 参数名: isMuted
+  参数描述: 目标用户的禁言状态，true表示禁言，false表示解除禁言。
+  参数类型: Boolean
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: input
+  默认取值: 'false'
+- 参数名: result
+  参数描述: 表示操作结果的提示信息，例如“禁言状态更新成功”。
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: output
+  默认取值: ''
+总起句: ''
+步骤:
+- 步骤序号: '1'
+  内容: 验证输入参数targetUserID和isMuted的有效性。
+  细分步骤:
+  - 步骤序号: '1.1'
+    内容: 检查targetUserID是否为空，如果为空则终止后续步骤并返回错误。
+    细分步骤: []
+  - 步骤序号: '1.2'
+    内容: 确保isMuted参数为布尔值，否则终止后续步骤并返回错误。
+    细分步骤: []
+- 步骤序号: '2'
+  内容: 在<a href="shuiyuanbasic/UserAccountService/UserAccountService-TableRoot/UserTable">UserTable</a>表中查询指定的targetUserID记录。
+  细分步骤:
+  - 步骤序号: '2.1'
+    内容: 如果未查找到对应记录，返回“用户不存在”的错误信息。
+    细分步骤: []
+- 步骤序号: '3'
+  内容: 更新<a href="shuiyuanbasic/UserAccountService/UserAccountService-TableRoot/UserTable">UserTable</a>表中targetUserID记录对应的is_muted字段。
+  细分步骤:
+  - 步骤序号: '3.1'
+    内容: 如果更新操作成功，跳转至下一步。
+    细分步骤: []
+  - 步骤序号: '3.2'
+    内容: 如果更新操作失败，记录失败原因并返回操作失败提示信息。
+    细分步骤: []
+- 步骤序号: '4'
+  内容: 返回操作结果。
+  细分步骤:
+  - 步骤序号: '4.1'
+    内容: 生成“禁言状态更新成功”的提示信息作为返回结果。
+    细分步骤: []
+对象路径: shuiyuanbasic/UserAccountService/UserAccountService-ProcessRoot/UserManagementProcess/setMuteStatus
+是否精炼过步骤: true

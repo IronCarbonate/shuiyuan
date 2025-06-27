@@ -1,0 +1,33 @@
+名称: AdminTable
+类型: Table
+描述: 管理员表，包含管理员的基础信息
+参数:
+- 参数名: admin_id
+  参数描述: 管理员的唯一ID
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  mode: input
+- 参数名: account_name
+  参数描述: 管理员账户名称
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  mode: input
+- 参数名: password
+  参数描述: hash加密的管理员密码
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  mode: input
+- 参数名: created_at
+  参数描述: 管理员创建时间
+  参数类型: DateTime
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  mode: input
+对象路径: shuiyuanbasic/UserAccountService/UserAccountService-TableRoot/AdminTable

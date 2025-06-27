@@ -1,0 +1,29 @@
+名称: UpdatePostCommentInfoMessage
+类型: API
+描述: 更新帖子评论信息，增加评论计数并更新最新评论时间。
+参数:
+- 参数名: postID
+  参数描述: 帖子唯一标识，用于定位具体帖子。
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: input
+  默认取值: null
+- 参数名: commentTime
+  参数描述: 最新评论的时间，用于更新帖子的最新评论时间字段。
+  参数类型: DateTime
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: input
+  默认取值: null
+- 参数名: result
+  参数描述: 操作结果提示信息，例如更新成功或失败。
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: output
+  默认取值: null
+对象路径: shuiyuanbasic/PostService/PostService-APIRoot/UpdatePostCommentInfoMessage

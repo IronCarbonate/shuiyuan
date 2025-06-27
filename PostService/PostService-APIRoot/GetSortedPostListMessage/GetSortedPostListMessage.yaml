@@ -1,0 +1,21 @@
+名称: GetSortedPostListMessage
+类型: API
+描述: 获取按最新评论时间排序的帖子列表。
+参数:
+- 参数名: userToken
+  参数描述: 用户登录令牌，用于验证用户身份有效性。
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: input
+  默认取值: null
+- 参数名: posts
+  参数描述: 返回的帖子摘要信息列表，包括帖子标题、评论数和postID。
+  参数类型: PostInfo
+  对象路径: shuiyuanbasic/PostService/PostService-SharedRoot/PostInfo
+  是否列表: true
+  是否必须: true
+  输入输出: output
+  默认取值: null
+对象路径: shuiyuanbasic/PostService/PostService-APIRoot/GetSortedPostListMessage

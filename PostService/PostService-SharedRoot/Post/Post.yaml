@@ -1,0 +1,63 @@
+名称: Post
+描述: 帖子信息，包含帖子内容、作者和评论相关信息
+参数:
+- 参数名: postID
+  参数描述: 帖子的唯一ID
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  mode: input
+  默认取值: null
+- 参数名: userID
+  参数描述: 发布者的唯一ID
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  mode: input
+  默认取值: null
+- 参数名: title
+  参数描述: 帖子的标题
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  mode: input
+  默认取值: null
+- 参数名: content
+  参数描述: 帖子的内容
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  mode: input
+  默认取值: null
+- 参数名: createdAt
+  参数描述: 帖子的创建时间
+  参数类型: DateTime
+  对象路径: ''
+  是否列表: false
+  mode: input
+  默认取值: null
+- 参数名: commentCount
+  参数描述: 帖子的评论数量
+  参数类型: Int
+  对象路径: ''
+  是否列表: false
+  mode: input
+  默认取值: null
+- 参数名: latestCommentTime
+  参数描述: 最近评论的时间
+  参数类型: DateTime
+  对象路径: ''
+  是否列表: false
+  mode: input
+  默认取值: null
+- 参数名: commentList
+  参数描述: 帖子的评论列表
+  参数类型: Comment
+  对象路径: shuiyuanbasic/PostService/PostService-SharedRoot/Comment
+  是否列表: true
+  mode: input
+  默认取值: null
+类型: Shared
+父类: ''
+是否抽象类: false
+对象路径: shuiyuanbasic/PostService/PostService-SharedRoot/Post

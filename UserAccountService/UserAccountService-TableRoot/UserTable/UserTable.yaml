@@ -1,0 +1,54 @@
+名称: UserTable
+类型: Table
+描述: 用户表，用于存储用户的基本账户信息
+参数:
+- 参数名: user_id
+  参数描述: 用户的唯一ID，使用UUID
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  mode: input
+- 参数名: account_name
+  参数描述: 用户账户名称
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  mode: input
+- 参数名: password
+  参数描述: 用户密码，采用hash加密
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  mode: input
+- 参数名: nickname
+  参数描述: 用户昵称，默认初始值为'未命名用户'
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: false
+  mode: input
+- 参数名: is_muted
+  参数描述: 用户是否被禁言，默认值为false
+  参数类型: Boolean
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  mode: input
+- 参数名: created_at
+  参数描述: 用户创建时间
+  参数类型: DateTime
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  mode: input
+- 参数名: permission
+  参数描述: 用户权限，例如'Normal'或者'Admin'
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  mode: input
+对象路径: shuiyuanbasic/UserAccountService/UserAccountService-TableRoot/UserTable

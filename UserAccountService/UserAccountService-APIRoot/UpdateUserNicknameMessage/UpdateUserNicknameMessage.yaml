@@ -1,0 +1,29 @@
+名称: UpdateUserNicknameMessage
+类型: API
+描述: 更新用户昵称
+参数:
+- 参数名: userToken
+  参数描述: 用户令牌，用于验证用户的登录状态和权限
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: input
+  默认取值: null
+- 参数名: newNickname
+  参数描述: 新的用户昵称
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: input
+  默认取值: null
+- 参数名: result
+  参数描述: 更新操作的结果信息，例如“修改昵称成功”
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: output
+  默认取值: null
+对象路径: shuiyuanbasic/UserAccountService/UserAccountService-APIRoot/UpdateUserNicknameMessage

@@ -1,0 +1,29 @@
+名称: UserRegisterMessage
+类型: API
+描述: 用户注册，生成用户ID，保存账户名称、密码和初始昵称，默认权限为普通用户。
+参数:
+- 参数名: accountName
+  参数描述: 用户账户名称，用于用户登录
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: input
+  默认取值: null
+- 参数名: password
+  参数描述: 用户账号密码，用于验证账户安全性
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: input
+  默认取值: null
+- 参数名: userID
+  参数描述: 新生成的用户ID，用于唯一标识用户
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: output
+  默认取值: null
+对象路径: shuiyuanbasic/UserAccountService/UserAccountService-APIRoot/UserRegisterMessage

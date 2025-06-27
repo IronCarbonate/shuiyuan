@@ -1,0 +1,32 @@
+名称: UpdatePostCommentInfoMessagePlanner
+类型: APIPlan
+总起句: ''
+步骤:
+- 步骤序号: '1'
+  内容: 查找对应 postID 的帖子记录。
+  细分步骤:
+  - 步骤序号: '1.1'
+    内容: 验证<a href="shuiyuanbasic/PostService/PostService-SharedRoot/Post">Post</a>是否存在与提供的
+      postID 匹配的记录。
+    细分步骤: []
+- 步骤序号: '2'
+  内容: 更新帖子记录的评论数量和最新评论时间。
+  细分步骤:
+  - 步骤序号: '2.1'
+    内容: 在<a href="shuiyuanbasic/PostService/PostService-TableRoot/PostTable">PostTable</a>中将评论数量字段加
+      1。
+    细分步骤: []
+  - 步骤序号: '2.2'
+    内容: 更新帖子记录的 latestCommentTime 字段为传入的 commentTime。
+    细分步骤: []
+- 步骤序号: '3'
+  内容: 返回操作结果提示信息。
+  细分步骤:
+  - 步骤序号: '3.1'
+    内容: 生成操作结果信息，例如更新成功。
+    细分步骤: []
+  - 步骤序号: '3.2'
+    内容: 返回结果作为 output 参数。
+    细分步骤: []
+对象路径: shuiyuanbasic/PostService/PostService-APIRoot/UpdatePostCommentInfoMessage/UpdatePostCommentInfoMessagePlanner
+是否精炼过步骤: true

@@ -1,0 +1,13 @@
+名称: UserLogoutMessagePlanner
+类型: APIPlan
+总起句: ''
+步骤:
+- 步骤序号: '1'
+  内容: 调用 <a href="shuiyuanbasic/UserAccountService/UserAccountService-ProcessRoot/TokenProcess/invalidateToken">invalidateToken</a>
+    方法，将 userToken 失效处理。
+  细分步骤: []
+- 步骤序号: '2'
+  内容: 返回登出成功的提示信息。
+  细分步骤: []
+对象路径: shuiyuanbasic/UserAccountService/UserAccountService-APIRoot/UserLogoutMessage/UserLogoutMessagePlanner
+是否精炼过步骤: true

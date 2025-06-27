@@ -1,0 +1,51 @@
+名称: deletePost
+类型: ProcessPlan
+description: 删除指定postID的帖子记录及其相关字段数据
+参数:
+- 参数名: postID
+  参数描述: 要删除的帖子ID
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: input
+  默认取值: ''
+- 参数名: result
+  参数描述: 删除操作的处理结果
+  参数类型: String
+  对象路径: ''
+  是否列表: false
+  是否必须: true
+  输入输出: output
+  默认取值: ''
+总起句: ''
+步骤:
+- 步骤序号: '1'
+  内容: 检查postID的存在性与合法性。
+  细分步骤:
+  - 步骤序号: '1.1'
+    内容: 查询<a href="shuiyuanbasic/PostService/PostService-TableRoot/PostTable">PostTable</a>中是否存在指定的postID。
+    细分步骤: []
+  - 步骤序号: '1.2'
+    内容: 如果postID不存在，记录错误信息至ErrorMessage，并终止方法。
+    细分步骤: []
+- 步骤序号: '2'
+  内容: 执行删除操作。
+  细分步骤:
+  - 步骤序号: '2.1'
+    内容: 根据指定postID，从<a href="shuiyuanbasic/PostService/PostService-TableRoot/PostTable">PostTable</a>中删除对应记录。
+    细分步骤: []
+  - 步骤序号: '2.2'
+    内容: 如果存在和postID相关联的评论，从<a href="shuiyuanbasic/CommentService/CommentService-TableRoot/CommentTable">CommentTable</a>中删除所有关联的评论记录。
+    细分步骤: []
+  - 步骤序号: '2.3'
+    内容: 如果有其他引用字段或关联数据需要清理，执行清理操作。
+    细分步骤: []
+- 步骤序号: '3'
+  内容: 返回结果。
+  细分步骤:
+  - 步骤序号: '3.1'
+    内容: 返回字符串'Post deleted successfully'作为结果。
+    细分步骤: []
+对象路径: shuiyuanbasic/PostService/PostService-ProcessRoot/PostManagementProcess/deletePost
+是否精炼过步骤: true
