@@ -1,5 +1,0 @@
-名称: UserPermissionProcess
-类型: Process
-描述: 用于处理用户权限检测的功能集合，包括检查登录状态和返回权限等级的功能。
-参数: []
-对象路径: shuiyuanbasic/UserAccountService/UserAccountService-ProcessRoot/UserPermissionProcess

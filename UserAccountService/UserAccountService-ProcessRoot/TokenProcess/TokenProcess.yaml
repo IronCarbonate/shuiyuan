@@ -1,5 +1,0 @@
-名称: TokenProcess
-类型: Process
-描述: 这是一个用于处理用户和管理员登录状态的功能集合，包括生成和注销用户Token的方法。
-参数: []
-对象路径: shuiyuanbasic/UserAccountService/UserAccountService-ProcessRoot/TokenProcess

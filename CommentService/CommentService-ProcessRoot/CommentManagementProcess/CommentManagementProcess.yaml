@@ -1,5 +1,0 @@
-名称: CommentManagementProcess
-类型: Process
-描述: 用于评论管理的Process
-参数: []
-对象路径: shuiyuanbasic/CommentService/CommentService-ProcessRoot/CommentManagementProcess

@@ -1,1 +1,0 @@
-//name: PostService , Type: Service

@@ -1,5 +1,0 @@
-名称: UserManagementProcess
-类型: Process
-描述: 用于处理用户基本信息管理的功能集合，包括用户创建、昵称更新和禁言状态设置的功能。
-参数: []
-对象路径: shuiyuanbasic/UserAccountService/UserAccountService-ProcessRoot/UserManagementProcess
