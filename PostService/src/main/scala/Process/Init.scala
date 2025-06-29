@@ -22,12 +22,15 @@ object Init {
       _ <- API.init(config.maximumClientConnection)
       _ <- Common.DBAPI.SwitchDataSourceMessage(projectName = Global.ServiceCenter.projectName).send
       _ <- initSchema(schemaName)
-            /** 帖子表，包含帖子信息的基本结构
-       * post_id: 每个帖子的唯一标识符
-       * user_id: 创建该帖子的用户标识符
-       * title: 帖子的标题
-       * content: 帖子的内容
-       * create_time: 帖子的创建时间，单位为毫秒
+            /** 帖子表，包含帖子相关的基本信息
+       * post_id: 帖子唯一ID
+       * user_id: 帖子发布者用户ID
+       * title: 帖子标题
+       * content: 帖子内容
+       * tag: 帖子所属标签
+       * is_pinned: 是否置顶
+       * created_at: 帖子创建时间
+       * updated_at: 帖子最后更新的时间
        */
       _ <- writeDB(
         s"""
@@ -36,7 +39,26 @@ object Init {
             user_id TEXT NOT NULL,
             title TEXT NOT NULL,
             content TEXT NOT NULL,
-            create_time BIGINT NOT NULL
+            tag TEXT NOT NULL,
+            is_pinned BOOLEAN NOT NULL DEFAULT false,
+            created_at TIMESTAMP NOT NULL,
+            updated_at TIMESTAMP NOT NULL
+        );
+         
+        """,
+        List()
+      )
+      /** 存储帖子的点赞信息。
+       * post_like_id: 点赞记录的唯一ID
+       * post_id: 点赞的帖子ID
+       * user_id: 点赞的用户ID
+       */
+      _ <- writeDB(
+        s"""
+        CREATE TABLE IF NOT EXISTS "${schemaName}"."post_like_table" (
+            post_like_id VARCHAR NOT NULL PRIMARY KEY,
+            post_id TEXT NOT NULL,
+            user_id TEXT NOT NULL
         );
          
         """,

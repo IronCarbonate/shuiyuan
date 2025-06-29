@@ -22,11 +22,14 @@ object Init {
       _ <- API.init(config.maximumClientConnection)
       _ <- Common.DBAPI.SwitchDataSourceMessage(projectName = Global.ServiceCenter.projectName).send
       _ <- initSchema(schemaName)
-            /** 用户表，包含用户的账户信息和创建时间
-       * user_id: 用户的唯一ID
-       * account_name: 用户的账户名，必须唯一
-       * password: 用户的加密密码
-       * create_time: 账户创建时间，单位为毫秒
+            /** 用户表，包含用户的基本信息
+       * user_id: 用户的唯一ID，自动递增主键
+       * account_name: 用户账号名称，唯一标识
+       * password: 用户密码
+       * nickname: 用户昵称
+       * role: 用户角色（Admin 或 Normal）
+       * is_muted: 是否被禁言
+       * created_at: 用户注册时间
        */
       _ <- writeDB(
         s"""
@@ -34,7 +37,10 @@ object Init {
             user_id VARCHAR NOT NULL PRIMARY KEY,
             account_name TEXT NOT NULL,
             password TEXT NOT NULL,
-            create_time BIGINT NOT NULL
+            nickname TEXT,
+            role TEXT NOT NULL DEFAULT 'Normal',
+            is_muted BOOLEAN NOT NULL DEFAULT false,
+            created_at TIMESTAMP NOT NULL
         );
          
         """,

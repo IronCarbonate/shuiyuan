@@ -14,22 +14,28 @@ import scala.util.Try
 
 import org.joda.time.DateTime
 import java.util.UUID
-
+import Objects.UserService.UserRole
 
 /**
  * User
- * desc: 用户信息，包括用户ID、账户名、密码以及创建时间
- * @param userID: String (用户的唯一标识)
- * @param accountName: String (账户名)
- * @param password: String (用户密码)
- * @param createTime: Long (创建时间，单位是毫秒)
+ * desc: 用户信息，包括账号、昵称、角色等
+ * @param userID: String (用户的唯一ID)
+ * @param accountName: String (用户账号名称)
+ * @param password: String (用户账号密码)
+ * @param nickname: String (用户昵称)
+ * @param role: UserRole:1105 (用户角色，枚举类型)
+ * @param isMuted: Boolean (是否被禁言)
+ * @param createdAt: DateTime (创建时间)
  */
 
 case class User(
   userID: String,
   accountName: String,
   password: String,
-  createTime: Long
+  nickname: String,
+  role: UserRole,
+  isMuted: Boolean,
+  createdAt: DateTime
 ){
 
   //process class code 预留标志位，不要删除

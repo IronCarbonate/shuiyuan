@@ -20,10 +20,10 @@ import java.util.UUID
 
 /**
  * DeletePostMessage
- * desc: 用户删除自己的帖子
- * @param userToken: String (用于用户身份鉴权的token)
- * @param postID: String (需要删除的帖子ID)
- * @return deleteResult: String (删除结果，返回成功或失败的信息)
+ * desc: 删除指定帖子并返回操作结果。
+ * @param userToken: String (用户的会话令牌，用于验证当前用户身份和权限。)
+ * @param postID: String (帖子唯一标识符，用于指定需要删除的帖子。)
+ * @return result: String (操作结果字符串，表明帖子删除的成功与否。)
  */
 
 case class DeletePostMessage(

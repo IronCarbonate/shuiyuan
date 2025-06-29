@@ -15,9 +15,14 @@ import org.http4s.client.Client
 import org.http4s.dsl.io.*
 import scala.collection.concurrent.TrieMap
 import Common.Serialize.CustomColumnTypes.*
-import Impl.UserLoginMessagePlanner
-import Impl.UserRegisterMessagePlanner
-import Impl.ValidateUserTokenMessagePlanner
+import Impl.GetNickNameByIDPlanner
+import Impl.UpdateUserNicknameMessagePlanner
+import Impl.GetUserStatusByIDMessagePlanner
+import Impl.RegisterUserMessagePlanner
+import Impl.GetUserByAccountNameMessagePlanner
+import Impl.GetUserRoleByIDMessagePlanner
+import Impl.QueryUserTokenMessagePlanner
+import Impl.VerifyAccountPasswordMessagePlanner
 import Common.API.TraceID
 import org.joda.time.DateTime
 import org.http4s.circe.*
@@ -29,24 +34,59 @@ object Routes:
 
   private def executePlan(messageType: String, str: String): IO[String] =
     messageType match {
-      case "UserLoginMessage" =>
+      case "GetNickNameByID" =>
         IO(
-          decode[UserLoginMessagePlanner](str) match
-            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for UserLoginMessage[${err.getMessage}]")
+          decode[GetNickNameByIDPlanner](str) match
+            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for GetNickNameByID[${err.getMessage}]")
             case Right(value) => value.fullPlan.map(_.asJson.toString)
         ).flatten
        
-      case "UserRegisterMessage" =>
+      case "UpdateUserNicknameMessage" =>
         IO(
-          decode[UserRegisterMessagePlanner](str) match
-            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for UserRegisterMessage[${err.getMessage}]")
+          decode[UpdateUserNicknameMessagePlanner](str) match
+            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for UpdateUserNicknameMessage[${err.getMessage}]")
             case Right(value) => value.fullPlan.map(_.asJson.toString)
         ).flatten
        
-      case "ValidateUserTokenMessage" =>
+      case "GetUserStatusByIDMessage" =>
         IO(
-          decode[ValidateUserTokenMessagePlanner](str) match
-            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for ValidateUserTokenMessage[${err.getMessage}]")
+          decode[GetUserStatusByIDMessagePlanner](str) match
+            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for GetUserStatusByIDMessage[${err.getMessage}]")
+            case Right(value) => value.fullPlan.map(_.asJson.toString)
+        ).flatten
+       
+      case "RegisterUserMessage" =>
+        IO(
+          decode[RegisterUserMessagePlanner](str) match
+            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for RegisterUserMessage[${err.getMessage}]")
+            case Right(value) => value.fullPlan.map(_.asJson.toString)
+        ).flatten
+       
+      case "GetUserByAccountNameMessage" =>
+        IO(
+          decode[GetUserByAccountNameMessagePlanner](str) match
+            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for GetUserByAccountNameMessage[${err.getMessage}]")
+            case Right(value) => value.fullPlan.map(_.asJson.toString)
+        ).flatten
+       
+      case "GetUserRoleByIDMessage" =>
+        IO(
+          decode[GetUserRoleByIDMessagePlanner](str) match
+            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for GetUserRoleByIDMessage[${err.getMessage}]")
+            case Right(value) => value.fullPlan.map(_.asJson.toString)
+        ).flatten
+       
+      case "QueryUserTokenMessage" =>
+        IO(
+          decode[QueryUserTokenMessagePlanner](str) match
+            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for QueryUserTokenMessage[${err.getMessage}]")
+            case Right(value) => value.fullPlan.map(_.asJson.toString)
+        ).flatten
+       
+      case "VerifyAccountPasswordMessage" =>
+        IO(
+          decode[VerifyAccountPasswordMessagePlanner](str) match
+            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for VerifyAccountPasswordMessage[${err.getMessage}]")
             case Right(value) => value.fullPlan.map(_.asJson.toString)
         ).flatten
        
@@ -60,13 +100,17 @@ object Routes:
     }
 
   def handlePostRequest(req: Request[IO]): IO[String] = {
-    req.as[Json].map {
-      bodyJson => {
+    req.as[Json].map { bodyJson =>
+      val hasPlanContext = bodyJson.hcursor.downField("planContext").succeeded
+
+      val updatedJson = if (hasPlanContext) {
+        bodyJson
+      } else {
         val planContext = PlanContext(TraceID(UUID.randomUUID().toString), transactionLevel = 0)
         val planContextJson = planContext.asJson
-        val updatedJson = bodyJson.deepMerge(Json.obj("planContext" -> planContextJson))
-        updatedJson.toString
+        bodyJson.deepMerge(Json.obj("planContext" -> planContextJson))
       }
+      updatedJson.toString
     }
   }
   val service: HttpRoutes[IO] = HttpRoutes.of[IO] {

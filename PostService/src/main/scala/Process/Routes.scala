@@ -15,10 +15,13 @@ import org.http4s.client.Client
 import org.http4s.dsl.io.*
 import scala.collection.concurrent.TrieMap
 import Common.Serialize.CustomColumnTypes.*
-import Impl.CreatePostMessagePlanner
-import Impl.QueryPostMessagePlanner
-import Impl.ListPostsMessagePlanner
-import Impl.DeletePostMessagePlanner
+import Impl.QueryPinnedPostsMessageByTagsPlanner
+import Impl.CancelLikePostMessagePlanner
+import Impl.LikePostMessagePlanner
+import Impl.QueryUnPinnedPostsMessageByTagsPlanner
+import Impl.QueryUnPinnedPostsMessagePlanner
+import Impl.QueryPostDetailsMessagePlanner
+import Impl.QueryPinnedPostsMessagePlanner
 import Common.API.TraceID
 import org.joda.time.DateTime
 import org.http4s.circe.*
@@ -30,31 +33,52 @@ object Routes:
 
   private def executePlan(messageType: String, str: String): IO[String] =
     messageType match {
-      case "CreatePostMessage" =>
+      case "QueryPinnedPostsMessageByTags" =>
         IO(
-          decode[CreatePostMessagePlanner](str) match
-            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for CreatePostMessage[${err.getMessage}]")
+          decode[QueryPinnedPostsMessageByTagsPlanner](str) match
+            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for QueryPinnedPostsMessageByTags[${err.getMessage}]")
             case Right(value) => value.fullPlan.map(_.asJson.toString)
         ).flatten
        
-      case "QueryPostMessage" =>
+      case "CancelLikePostMessage" =>
         IO(
-          decode[QueryPostMessagePlanner](str) match
-            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for QueryPostMessage[${err.getMessage}]")
+          decode[CancelLikePostMessagePlanner](str) match
+            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for CancelLikePostMessage[${err.getMessage}]")
             case Right(value) => value.fullPlan.map(_.asJson.toString)
         ).flatten
        
-      case "ListPostsMessage" =>
+      case "LikePostMessage" =>
         IO(
-          decode[ListPostsMessagePlanner](str) match
-            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for ListPostsMessage[${err.getMessage}]")
+          decode[LikePostMessagePlanner](str) match
+            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for LikePostMessage[${err.getMessage}]")
             case Right(value) => value.fullPlan.map(_.asJson.toString)
         ).flatten
        
-      case "DeletePostMessage" =>
+      case "QueryUnPinnedPostsMessageByTags" =>
         IO(
-          decode[DeletePostMessagePlanner](str) match
-            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for DeletePostMessage[${err.getMessage}]")
+          decode[QueryUnPinnedPostsMessageByTagsPlanner](str) match
+            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for QueryUnPinnedPostsMessageByTags[${err.getMessage}]")
+            case Right(value) => value.fullPlan.map(_.asJson.toString)
+        ).flatten
+       
+      case "QueryUnPinnedPostsMessage" =>
+        IO(
+          decode[QueryUnPinnedPostsMessagePlanner](str) match
+            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for QueryUnPinnedPostsMessage[${err.getMessage}]")
+            case Right(value) => value.fullPlan.map(_.asJson.toString)
+        ).flatten
+       
+      case "QueryPostDetailsMessage" =>
+        IO(
+          decode[QueryPostDetailsMessagePlanner](str) match
+            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for QueryPostDetailsMessage[${err.getMessage}]")
+            case Right(value) => value.fullPlan.map(_.asJson.toString)
+        ).flatten
+       
+      case "QueryPinnedPostsMessage" =>
+        IO(
+          decode[QueryPinnedPostsMessagePlanner](str) match
+            case Left(err) => err.printStackTrace(); throw new Exception(s"Invalid JSON for QueryPinnedPostsMessage[${err.getMessage}]")
             case Right(value) => value.fullPlan.map(_.asJson.toString)
         ).flatten
        
@@ -68,13 +92,17 @@ object Routes:
     }
 
   def handlePostRequest(req: Request[IO]): IO[String] = {
-    req.as[Json].map {
-      bodyJson => {
+    req.as[Json].map { bodyJson =>
+      val hasPlanContext = bodyJson.hcursor.downField("planContext").succeeded
+
+      val updatedJson = if (hasPlanContext) {
+        bodyJson
+      } else {
         val planContext = PlanContext(TraceID(UUID.randomUUID().toString), transactionLevel = 0)
         val planContextJson = planContext.asJson
-        val updatedJson = bodyJson.deepMerge(Json.obj("planContext" -> planContextJson))
-        updatedJson.toString
+        bodyJson.deepMerge(Json.obj("planContext" -> planContextJson))
       }
+      updatedJson.toString
     }
   }
   val service: HttpRoutes[IO] = HttpRoutes.of[IO] {

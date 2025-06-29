@@ -14,16 +14,23 @@ import scala.util.Try
 
 import org.joda.time.DateTime
 import java.util.UUID
-
+import Objects.PostService.PostTag
+import Objects.PostService.PostLikeEntry
+import Objects.CommentService.Comment
 
 /**
  * Post
- * desc: 帖子信息，包括标题、内容等基本信息
- * @param postID: String (帖子的唯一ID)
- * @param userID: String (发布帖子的用户ID)
+ * desc: 帖子信息，包括标题、内容以及交互信息
+ * @param postID: String (帖子的唯一标识符)
+ * @param userID: String (发布帖子的用户唯一标识符)
  * @param title: String (帖子的标题)
  * @param content: String (帖子的内容)
- * @param createTime: DateTime (帖子的创建时间)
+ * @param tag: PostTag (帖子的标签，表示所属分类)
+ * @param isPinned: Boolean (帖子是否置顶)
+ * @param createdAt: DateTime (帖子创建时间)
+ * @param updatedAt: DateTime (帖子更新时间)
+ * @param likes: PostLikeEntry (帖子的点赞信息列表)
+ * @param comments: Comment:1031 (帖子的评论列表)
  */
 
 case class Post(
@@ -31,7 +38,12 @@ case class Post(
   userID: String,
   title: String,
   content: String,
-  createTime: DateTime
+  tag: PostTag,
+  isPinned: Boolean,
+  createdAt: DateTime,
+  updatedAt: DateTime,
+  likes: List[PostLikeEntry],
+  comments: List[Comment]
 ){
 
   //process class code 预留标志位，不要删除

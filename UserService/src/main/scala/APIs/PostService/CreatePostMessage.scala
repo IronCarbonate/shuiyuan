@@ -16,22 +16,24 @@ import scala.util.Try
 
 import org.joda.time.DateTime
 import java.util.UUID
-import Objects.PostService.PostCreateResult
+import Objects.PostService.PostTag
 
 /**
  * CreatePostMessage
- * desc: 用户创建新帖子
- * @param userToken: String (用于鉴权的用户Token)
- * @param title: String (帖子标题，用户创建时输入)
- * @param content: String (帖子内容，用户创建时输入)
- * @return postCreateResult: PostCreateResult:1017 (帖子创建结果，包含帖子ID和创建时间)
+ * desc: 创建帖子并保存到数据库。
+ * @param userToken: String (用户登录会话令牌，用于验证用户身份。)
+ * @param title: String (帖子标题，简要描述帖子内容。)
+ * @param content: String (帖子正文内容。)
+ * @param tag: PostTag:1045 (帖子标签，用于标记帖子分类。)
+ * @return postID: String (生成的帖子唯一标识ID。)
  */
 
 case class CreatePostMessage(
   userToken: String,
   title: String,
-  content: String
-) extends API[PostCreateResult](PostServiceCode)
+  content: String,
+  tag: PostTag
+) extends API[String](PostServiceCode)
 
 
 
